@@ -20,7 +20,7 @@ jobs:
           set CXXFLAGS=-m32
           mkdir build
           cmake -S . -B build -G Ninja ^
-            -DCMAKE_CXX_FLAGS="/D_WIN32_WINNT=0x0601 /DWINVER=0x0601 /DWIN32 /D_WINDOWS /EHsc -m32" ^
+            -DCMAKE_CXX_FLAGS="/D_WIN32_WINNT=0x0601 /DWINVER=0x0601 /DWIN32 /D_WINDOWS /EHsc -m32 /MD" ^
             -DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreadedDLL ^
             -DCMAKE_BUILD_TYPE=Release
 
