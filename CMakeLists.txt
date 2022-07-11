@@ -31,3 +31,5 @@ install(FILES minhook.lua
     COMPONENT LuaJIT-MinHook
     DESTINATION "."
 )
+
+add_subdirectory(packaging)
