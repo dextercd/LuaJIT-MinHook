@@ -59,7 +59,7 @@ void __thiscall GameScreenshake_xmm1_shim(CameraWorld* camera, vec2* pos)
     float strength;
     __asm movd strength, xmm1
 
-    GameScreenshake_hook_target(camera, pos, strength);
+    [[clang::noinline]] GameScreenshake_hook_target(camera, pos, strength);
 }
 
 
