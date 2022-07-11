@@ -46,9 +46,11 @@ struct vec2;
 extern "C" __declspec(dllexport)
 void (__thiscall *real_GameScreenshake)(CameraWorld* camera, vec2* pos) = nullptr;
 
+[[gnu::noinline]]
 extern "C" __declspec(dllexport)
 void GameScreenshake_hook_target(CameraWorld* camera, vec2* pos, float strength)
 {
+    asm("");
     __asm movd xmm1, strength;
     real_GameScreenshake(camera, pos);
 }
@@ -59,7 +61,7 @@ void __thiscall GameScreenshake_xmm1_shim(CameraWorld* camera, vec2* pos)
     float strength;
     __asm movd strength, xmm1
 
-    [[clang::noinline]] GameScreenshake_hook_target(camera, pos, strength);
+    GameScreenshake_hook_target(camera, pos, strength);
 }
 
 
