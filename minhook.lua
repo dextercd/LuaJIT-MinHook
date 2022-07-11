@@ -14,9 +14,9 @@ function load_minhook(path)
     void __thiscall GameScreenshake_xmm1_shim(struct CameraWorld* camera, struct vec2* pos);
     ]])
 
-    minhook = {}
+    local minhook = {}
 
-    lib = ffi.load(dll_path)
+    local lib = ffi.load(dll_path)
     minhook.lib = lib
 
     minhook.initialize = function()
