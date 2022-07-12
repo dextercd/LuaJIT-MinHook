@@ -19,11 +19,11 @@ function load_minhook(path)
     local lib = ffi.load(dll_path)
     minhook.lib = lib
 
-    minhook.initialize = function()
+    function minhook.initialize()
         return lib.mh_initialize()
     end
 
-    minhook.uninitialize = function()
+    function minhook.uninitialize()
         return lib.mh_initialize()
     end
 
