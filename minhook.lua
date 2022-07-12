@@ -31,12 +31,19 @@ function load_minhook(path)
         return tostring(typ):find("(*)") ~= nil
     end
 
+    -- Returns a function pointer type when the given type is a function or
+    -- function pointer.
     function function_pointer_type(typ)
         if is_function_pointer(typ) then
             return typ
         end
 
-        return ffi.typeof("$*", typ)
+        local new_type = ffi.typeof("$*", typ)
+        if not is_function_pointer(new_type) then
+            error("Given type is not a function or function pointer")
+        end
+
+        return new_type
     end
 
     function minhook.create_hook(func, hook)
