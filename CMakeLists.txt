@@ -18,6 +18,7 @@ FetchContent_MakeAvailable(MinHook)
 
 add_library(luajit_minhook MODULE
     minhook.cpp
+    std_string.cpp
 )
 
 target_link_libraries(luajit_minhook PRIVATE minhook)
