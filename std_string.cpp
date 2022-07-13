@@ -38,19 +38,19 @@ void std_string_assign_n(std::string* str, const char* cstr, std::size_t n)
 }
 
 extern "C" __declspec(dllexport)
-bool std_string_eq(std::string* str, const char* cstr)
+bool std_string_eq(const std::string* str, const char* cstr)
 {
     return *str == cstr;
 }
 
 extern "C" __declspec(dllexport)
-int std_string_cmp(std::string* str, const char* cstr)
+int std_string_cmp(const std::string* str, const char* cstr)
 {
     return str->compare(cstr);
 }
 
 extern "C" __declspec(dllexport)
-int std_string_cmp_n(std::string* str, const char* cstr, std::size_t n)
+int std_string_cmp_n(const std::string* str, const char* cstr, std::size_t n)
 {
     return str->compare(std::string_view{cstr, n});
 }

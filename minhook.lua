@@ -19,15 +19,19 @@ function load_minhook(path)
     void GameScreenshake_hook_target(struct CameraWorld* camera, struct vec2* pos, float strength);
     void __thiscall GameScreenshake_xmm1_shim(struct CameraWorld* camera, struct vec2* pos);
 
+    // std::string utility functions
     char* std_string_data(struct std_string* str);
+
     struct std_string* std_string_new(const char* cstr);
     struct std_string* std_string_new_n(const char* cstr, size_t n);
     void std_string_delete(struct std_string* str);
+
     void std_string_assign(struct std_string* str, const char* cstr);
     void std_string_assign_n(struct std_string* str, const char* cstr, size_t n);
-    bool std_string_eq(struct std_string* str, const char* cstr);
-    int std_string_cmp(struct std_string* str, const char* cstr);
-    int std_string_cmp_n(struct std_string* str, const char* cstr, size_t n);
+
+    bool std_string_eq(const struct std_string* str, const char* cstr);
+    int std_string_cmp(const struct std_string* str, const char* cstr);
+    int std_string_cmp_n(const struct std_string* str, const char* cstr, size_t n);
     ]])
 
     minhook.initialize = lib.mh_initialize
