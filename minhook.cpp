@@ -68,7 +68,7 @@ BOOL WINAPI DllMain(
     DWORD fdwReason,
     LPVOID lpReserved)
 {
-    switch(fdwReason) { 
+    switch(fdwReason) {
     case DLL_PROCESS_DETACH:
         MH_Uninitialize();
         break;
