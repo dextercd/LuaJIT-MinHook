@@ -2,6 +2,18 @@
 #include <string_view>
 
 extern "C" __declspec(dllexport)
+std::size_t std_string_size(const std::string* str)
+{
+    return str->size();
+}
+
+extern "C" __declspec(dllexport)
+const char* std_string_c_str(const std::string* str)
+{
+    return str->c_str();
+}
+
+extern "C" __declspec(dllexport)
 char* std_string_data(std::string* str)
 {
     return str->data();

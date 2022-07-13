@@ -20,6 +20,8 @@ function load_minhook(path)
     void __thiscall GameScreenshake_xmm1_shim(struct CameraWorld* camera, struct vec2* pos);
 
     // std::string utility functions
+    size_t std_string_size(const struct std_string* str);
+    const char* std_string_c_str(const struct std_string* str);
     char* std_string_data(struct std_string* str);
 
     struct std_string* std_string_new(const char* cstr);
@@ -76,6 +78,8 @@ function load_minhook(path)
         }
     end
 
+    minhook.string_size = lib.std_string_size
+    minhook.string_c_str = lib.std_string_c_str
     minhook.string_data = lib.std_string_data
     minhook.string_new = lib.std_string_new
     minhook.string_new_n = lib.std_string_new_n
