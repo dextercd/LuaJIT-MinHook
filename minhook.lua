@@ -1,6 +1,12 @@
 function load_minhook(path)
-    local dll_path = path .. "/luajit_minhook.dll"
+    local minhook = {}
     local ffi = require("ffi")
+
+    local dll_path = path .. "/luajit_minhook.dll"
+
+    local lib = ffi.load(dll_path)
+    minhook.lib = lib
+
     ffi.cdef([[
     bool mh_initialize();
     bool mh_uninitialize();
@@ -12,20 +18,14 @@ function load_minhook(path)
     void (*real_GameScreenshake)(struct CameraWorld*, struct vec2*);
     void GameScreenshake_hook_target(struct CameraWorld* camera, struct vec2* pos, float strength);
     void __thiscall GameScreenshake_xmm1_shim(struct CameraWorld* camera, struct vec2* pos);
+
     ]])
 
-    local minhook = {}
-
-    local lib = ffi.load(dll_path)
-    minhook.lib = lib
-
-    function minhook.initialize()
-        return lib.mh_initialize()
-    end
-
-    function minhook.uninitialize()
-        return lib.mh_initialize()
-    end
+    minhook.initialize = lib.mh_initialize
+    minhook.uninitialize = lib.mh_initialize
+    minhook.remove = lib.mh_remove_hook
+    minhook.enable = lib.mh_enable_hook
+    minhook.disable = lib.mh_disable_hook
 
     function is_function_pointer(typ)
         return tostring(typ):find("(*)") ~= nil
@@ -61,18 +61,6 @@ function load_minhook(path)
             hook_func = hook_func,
             original = original
         }
-    end
-
-    function minhook.remove(func)
-        return lib.mh_remove_hook(func)
-    end
-
-    function minhook.enable(func)
-        return lib.mh_enable_hook(func)
-    end
-
-    function minhook.disable(func)
-        return lib.mh_disable_hook(func)
     end
 
     return minhook
